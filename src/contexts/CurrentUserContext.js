@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useMemo } from "react";
 import axios from "axios";
 
 
@@ -23,6 +23,22 @@ export const CurrentUserProvider = ({ children }) => {
     useEffect(() => {
       handleMount();
     }, []);
+
+    useMemo(() => 
+    axiosRes.interceptors.response.use(
+      (response) => response,
+      async (err) => {
+        if (err.response?.status === 401){
+          try {
+            await axios.post('dj-rest-auth/token/refresh')
+            } catch(err) {
+
+
+              // Complete video
+            }
+        }
+      }
+    ))
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
