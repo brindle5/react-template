@@ -46,7 +46,6 @@ const NavBar = () => {
       to={"/profiles/${currentUser?.profile_id}"}
         <img src={currentUser?.profile_image} />
       className={styles.NavLink}
-    >
     </NavLink>
      </>
 
